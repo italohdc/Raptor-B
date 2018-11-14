@@ -6,6 +6,8 @@
 
 # Raptor B - RoboCup Rescue Maze
 
+<img align="right" src="Assets/RaptorB.jpg" width="40%">
+
 **Raptor B Team:**
 - Italo Lelis de Carvalho, João Pedro Rosada Canesin
 
@@ -18,19 +20,19 @@
 
 ### Tremaux Algorithm 
 
-For instance it's used an algorithm called "Tremaux". This algorithm has as it's main logic to make the robot go right always as possible. If the robot cannot go right, it goes forward and, in the last scenario, goes left.
+To explore the maze, it's used an algorithm called "Tremaux". This algorithm makes the robot goes right always as possible. If the robot cannot go right, it goes forward and, in the last scenario, goes left.
 
-<img src="Assets/tremaux1.png" width="48%">
-<img align="right" src="Assets/tremaux1.png" width="48%">
+| ![](Assets/tremaux1.png) | ![](Assets/tremaux2.png) |
+|-|-|
 
 You can read more about Tremaux Algorithm in here: http://blog.jamisbuck.org/2014/05/12/tremauxs-algorithm.html
 
 ### A* Algorithm
 
-To make the robot return to it's initial position, a pathfinder algorithm called A* (A-Star) is used. Both distances of each position to the destination and to the actual position are evaluated , and them the algorithm route the path with the least sum of those distances. This assures that the robot will follow the shortest path possible to it's initial position.
+To make the robot return to it's initial position, a pathfinder algorithm called A* (A-Star) is used. Both distances of each position to the destination and to the current position are evaluated, and them the algorithm routes the path with the least sum of those distances. This assures that the robot will follow the shortest path possible to it's initial position.
 
-<img src="Assets/a_star1.png" width="48%">
-<img align="right" src="Assets/a_star1.png" width="48%">
+| ![](Assets/a_star1.png) | ![](Assets/a_star2.png) |
+|-|-|
 
 The implementation of the algorithm is based on the project [A* Search on Processing](https://github.com/italohdc/maze-solving).
 
