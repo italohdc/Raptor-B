@@ -12,7 +12,7 @@ Aiming to participate in the **RoboCup Rescue Maze** competition, we developed a
 
 This repository contains the latest version of the source code used in that robot on RoboCup Germany in 2016.
 
-The code here is published "as is", which means there was no code review nor it's garanted to work properly (this repository is just for archival purposes).
+The code here is published "as is", which means there was no code review nor it's granted to work properly (this repository is just for archival purposes).
 
 See the robot working: [watch video](https://www.youtube.com/watch?v=Wu9DYnvc1BU&list=PLDN8gBFJnTTuKxWZ3ajpXCG3o9lmeILe6&index=3)
 
@@ -54,7 +54,9 @@ The [Arduino Due](Due/) executes functions to handle actuators and most sensors,
 
 The [Arduino Nano](Nano/) reads the heat sensor and communicates with the main board.
 
-![Hardware Scheme](Assets/hardware.png)
+<p align="center">
+    <img href="Assets/hardware.png" src="Assets/hardware.png" width="100%">
+</p>
 
 ### Components
 
