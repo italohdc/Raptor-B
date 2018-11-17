@@ -58,3 +58,7 @@ The Arduino Due is used as the main board. It executes functions to handle actua
 
 - [``vitima.ino``](vitima.ino)
 	- Read temperature sensors from Arduino Nano and search for heat victims.
+
+---
+
+\* Some files we're cleaned up to remove unnecessary comments (for a better visualization). To see the original version, [check it here](https://github.com/italohdc/Raptor-B/tree/fbef40a7e1edeab37877cb6db84d7a86ed44b7b6/Due).

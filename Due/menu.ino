@@ -97,16 +97,13 @@ void updateMenu(void) {
 }
 
 void menu_setup() {
-  // rotate screen, if required
-  // u8g.setRot180();
-  
-  uiSetup();                                // setup key detection and debounce algorithm
+  uiSetup();                    // setup key detection and debounce algorithm
   menu_redraw_required = 1;     // force initial redraw
 }
 
 void menu_loop() {  
 
-  uiStep();                                     // check for key press
+  uiStep();                     // check for key press
     
   if (  menu_redraw_required != 0 ) {
     u8g.firstPage();
@@ -116,7 +113,7 @@ void menu_loop() {
     menu_redraw_required = 0;
   }
 
-  updateMenu();                            // update menu bar
+  updateMenu();                 // update menu bar
 
   ui_task();
   

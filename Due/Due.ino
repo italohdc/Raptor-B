@@ -83,7 +83,7 @@ const int motor3a=38, motor3b=40, motor3_pwm=4;//10;    //TE       26/28 5 3-1
 const int motor4a=34, motor4b=36, motor4_pwm=5;//11;    //FE       30/32 4 4-2
 const byte TP = 142;//135;  //125;//120;
 
-//////////MAZE//////////
+////////// MAZE //////////
 
 char maze[3][TAM_MAZE][TAM_MAZE];
 int maze_traveled[3][TAM_MAZE][TAM_MAZE];
@@ -123,7 +123,7 @@ const uint8_t min_visited = 50;//30;//36;//38;//((7*4)+(4*3)+2) * 0.9;
 //[0]Frente [1]Esq [2]Dir [3]Tras
 //==//
 
-//Àsterix//
+// A-Star (Àsterix) //
 int dist_to_end[TAM_MAZE][TAM_MAZE];
 int dist_to_start[TAM_MAZE][TAM_MAZE];
 int way_traveled[TAM_MAZE][TAM_MAZE];
@@ -132,7 +132,7 @@ char last_dir[TAM_MAZE][TAM_MAZE];
 bool ativar_vitima = true;
 //==//
 
-//TREMAUX//
+// TREMAUX //
 const int dist_parede = 12+4;//12+4;
 const int dist_parede_Ajuste = 15;
 
@@ -141,12 +141,12 @@ bool stop_fwd = false;
 bool search_victim_adjust = true;
 //==//
 
-//////////LCD//////////
+////////// LCD //////////
 char lcd_function_name[12];
   //lcd_function_name = "";
 //==//
 
-//////////DIGITAL//////////
+////////// DIGITAL //////////
 const byte pin_ultraTras = 43;
 const byte pin_ultraFrente = 47;
 const byte pin_ultraEsq = 49;
@@ -160,7 +160,7 @@ const byte pin_pushButton1 = 12;
 const byte pin_pushButton2 = 9;
 //==//
 
-///////////ANALOG/////////
+/////////// ANALOG /////////
 const byte pin_infraBaixo = 1; //ANALOG
 
 const byte pin_infraFrente1 = 6; //ANALOG
@@ -174,7 +174,7 @@ const byte pin_infraTras2 = 10; //ANALOG
 
 byte pin_battery = 0;
 
-//ENCODERS//
+// ENCODERS //
 const int Encoder_m1_PinA = 27;
 const int Encoder_m1_PinB = 29;
 
@@ -191,7 +191,7 @@ volatile int enc_read[] = {0,0,0,0};
 volatile int enc_read_SAVED[] = {0,0,0,0};
 //==//
 
-//VITIMA//
+// VITIMA //
 bool vitima_na_rampa = false;
 bool vitima_quadrante = false;  
 bool vitima_ja_encontrada = false;
@@ -230,6 +230,12 @@ int read_button_MENU ()
   return button_MENU;
 }
 int contB=0;
+
+
+// ========== //
+// VOID SETUP //
+// ========== //
+
 void setup() {
   int timer_setup = millis();
   u8g.setRot180();
@@ -248,11 +254,11 @@ void setup() {
   
   LOGLN("Gyro.Init");
   itg3205.itg3205initGyro();
- // delay(100);
-  //LOGLN("Gyro.Calibrate");
-  //itg3205.itg3205CalGyro();
-  //delay(100);
-//  gyro.zeroCalibrate(500, 2); //(time?,?)
+  // delay(100);
+  // LOGLN("Gyro.Calibrate");
+  // itg3205.itg3205CalGyro();
+  // delay(100);
+  // gyro.zeroCalibrate(500, 2); //(time?,?)
   
   
   pinMode(pin_LED, OUTPUT); DESLIGAR_LED
@@ -344,10 +350,8 @@ void setup() {
   //kit.detach();
   
   do{
-    //analogWrite(13, 180);
     draw_welcome();
   }while(read_button_MENU() == 0);
-  //delay(2000);//800);
   
   while(read_button_MENU() != 0);
   
@@ -374,83 +378,48 @@ void setup() {
   u8g.setFont(u8g_font_p01type);
 }
 
+
+// ========= //
+// TEST LOOP //
+// ========= //
+
 void loop_teste()
 {
-//  setMotor_encoder(100, 30);
-//
-//  setMotor(0,0,0,0); delay(800);
-  
-if (read_button_MENU()==3){
-  while(1){
-  u8g.firstPage();
-  do{
-  M_infra();
-  
-  }while(u8g.nextPage());
+  if (read_button_MENU()==3){
+    while(1){
+    u8g.firstPage();
+    do{
+    M_infra();
+    
+    }while(u8g.nextPage());
+    }
   }
-}
-if (read_button_MENU()==1){
-  while(1){
-  u8g.firstPage();
-  do{
-  M_ultra();
- 
-  }while(u8g.nextPage());
+  if (read_button_MENU()==1){
+    while(1){
+    u8g.firstPage();
+    do{
+    M_ultra();
+  
+    }while(u8g.nextPage());
+    }
   }
 }
 
-//  u8g.firstPage();
-//  do{
-//  u8g.setFont(u8g_font_helvR08);//unifont); -8px
-//  
-//  u8g.setPrintPos(10, 8); u8g.print(read_corQuad());
-// 
-//  }while(u8g.nextPage());
-//
-//  setMotor(TP,TP,TP,TP);
-//  LOG(read_Infra('E',1));
-//  LOG(" ");
-//  LOGLN(read_Infra('E',2));
 
-
-
-//if(read_button_MENU() != 0){ LOG(++contB); LOGLN("==========================");}
-//  LOGLN(readGyroscope('Y'));
-//  LOG(" ");
-//  LOGLN(readGyroscope('Z'));
-  
-
-//  u8g.firstPage();
-//  do{
-//  M_accel();
-//  M_gyro();
-//  }while(u8g.nextPage());
-
-//teste_90();
-  //teste_temp();
-  //teste();
-}
+// ========= //
+// VOID LOOP //
+// ========= //
 
 void loop()
 {
   if(PRINT_MAZE) draw();
   tremaux();
 
-  //if( read_button_MENU() != 0)//maze_finished() ) //read_button_MENU() != 0){
-//  {
-    while(visited_places >= min_visited && victims_found >= MAX_VICTIMS && pZ==false)
-    {
-      //while(1){
-      LIGAR_LED;
-      asterix();}
-    //}
-//  }
-
-  //==TRASH CODE==//
-  
- //LIGAR_LED
-  //teste();
-  
+  while(visited_places >= min_visited && victims_found >= MAX_VICTIMS && pZ==false)
+  {
+    LIGAR_LED;
+    asterix();
+  }
 }
 
 //Sometimes I believe compiler ignores all my comments

@@ -51,32 +51,6 @@ void delay_encoder (char dir, float dist) //Function to travel the robot using [
       if(enc_dist[e] < dist) enc_motor[e]=eTP; 
       else enc_motor[e]=0; //LOG(enc_dist[e]); LOG("\t");
     }
-    //LOGLN(" ");
-    //LOGLN();
-    
-    /*enc_setPoint = (enc_dist[0]+enc_dist[1]+enc_dist[2]+enc_dist[3])/4; //Measure setPoint by setting the average value of the encoders
-    
-    for(int e=0; e<4; e++){
-      enc_motor[e] = eTP - ((enc_dist[e] - enc_setPoint)*eKP);
-    }*/
-    
-    /*enc_motor[0] = eTP - (((enc_dist[0]+enc_dist[2])/2 - enc_setPoint)*eKP);
-    enc_motor[2] = enc_motor[0];
-    enc_motor[1] = eTP - (((enc_dist[1]+enc_dist[3])/2 - enc_setPoint)*eKP);
-    enc_motor[3] = enc_motor[1];*/
-    
-    /*for(int e=0; e<4; e++){
-      if(enc_dist[e] < dist)
-        enc_motor[e] = eTP - ((enc_dist[e] - enc_setPoint)*eKP); //Increase error on motor speed
-      else
-        enc_motor[e] = 0;//enc_motor[e] = ((dist - enc_dist[e])*eKP);
-    }*/
-
-    //if(vitima_quadrante && search_victim_adjust && !vitima_ja_encontrada){
-    //  procurar_vitima();
-    //  setMotor(TP,TP,TP,TP);
-    //}
-    //setMotor(enc_motor[0],enc_motor[1]+7,enc_motor[2],enc_motor[3]+7); //Inject speed
   }while(enc_dist[0]<dist || enc_dist[1]<dist || enc_dist[2]<dist || enc_dist[3]<dist);
 }
 //==//
@@ -142,15 +116,6 @@ void setMotor_encoder (uint8_t vel,  float dist) //Function to travel the robot 
     }
     
     enc_setPoint /= 4;
-    //LOGLN(" ");
-    //LOGLN();
-//    
-//    enc_setPoint = (enc_dist[0]+enc_dist[1]+enc_dist[2]+enc_dist[3])/4; //Measure setPoint by setting the average value of the encoders
-//    
-//    for(int e=0; e<4; e++){
-//      enc_motor[e] = eTP - ((enc_dist[e] - enc_setPoint)*eKP);
-//    }
-//    
     enc_motor[0] = vel - (((enc_dist[0]+enc_dist[2])/2 - enc_setPoint)*eKP);
     enc_motor[2] = enc_motor[0];
     enc_motor[1] = vel - (((enc_dist[1]+enc_dist[3])/2 - enc_setPoint)*eKP);
@@ -161,27 +126,8 @@ void setMotor_encoder (uint8_t vel,  float dist) //Function to travel the robot 
         enc_motor[e] = 0; //Increase error on motor speed
     }
    
-//    for(int e=0; e<4; e++){
-//      if(enc_dist[e] < dist)
-//        enc_motor[e] = vel - ((enc_dist[e] - enc_setPoint)*eKP); //Increase error on motor speed
-//      else
-//        enc_motor[e] = 0;//enc_motor[e] = ((dist - enc_dist[e])*eKP);
-//    }
-
-    
-//    print_info_data("encoders", 0,
-//                  "m1", enc_read[0],
-//                  "m2", enc_read[1],
-//                  "m3", enc_read[2],
-//                  "m4", enc_read[3],
-//                  " ", 0);
     setMotor(enc_motor[0],enc_motor[1],enc_motor[2],enc_motor[3]); //Inject speed
-    
-//    if(readAccel('X') > rampa.goingDOWN && readAccel('X') < 5) contador_rampa++;
-//    if(contador_rampa >= 20){//12){
-//      if(analisar_rampa_descer()) return;
-//    }
-    
+
   }while((enc_dist[0]<dist || enc_dist[1]<dist || enc_dist[2]<dist || enc_dist[3]<dist) && !stop_fwd);
 }
 //==//

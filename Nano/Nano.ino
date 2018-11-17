@@ -39,6 +39,10 @@
 #define CODIGO__TEMP_DEV_2 0x22<<1
 #define CODIGO__TEMP_DEV_3 0x5A<<1
 
+
+// On the previous version, the ultrasonic sensors
+// were handled by the Arduino Nano
+
 //Ultrasonic ultrasonic0(6,7);
 //Ultrasonic ultrasonic1(4,5);
 //Ultrasonic ultrasonic2(2,3);
@@ -62,9 +66,6 @@ void loop ()
 {
   comunicar();
   //testar_sensores();
-  
-  //ler_temperatura(2);
-  //Serial.println((celsius[2]/10)*2);
 }
 
 /*void testar_sensores () {
@@ -82,7 +83,8 @@ void comunicar ()
   {
     recByte = Serial.read();
     
-   /* if(recByte==107){
+    /*
+    if(recByte==107){
       ler_ultra(0);
       Serial.write(ultra[0]);
     }
@@ -99,6 +101,7 @@ void comunicar ()
       Serial.write(ultra[3]);
     }
     */
+    
     if(recByte==102){
       ler_temperatura(0);
       Serial.write(celsius[0]);
@@ -124,7 +127,8 @@ void comunicar ()
   //delay(100);
 }
 
-/*void ler_ultra (int u)
+/*
+void ler_ultra (int u)
 {
   if(u==0)
     ultra[0] = ultrasonic0.Ranging(CM);
@@ -138,6 +142,7 @@ void comunicar ()
   //delay(5);
 }
 */
+
 void ler_temperatura (int t)
 {
   int dev;

@@ -3,6 +3,8 @@
 //==============================================================
 //  *Flash Storage is always cleared as a program is uploaded.
 //==============================================================
+//              Not used on the latest version
+//==============================================================
 //
 //#define ADDR__VERIFY_IF_MAZE_SAVED 0
 //

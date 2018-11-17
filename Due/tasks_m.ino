@@ -23,7 +23,6 @@ void M_checksum ()
     }while(u8g.nextPage());
   }
   delay(500);
-  //break_task = true;
 }
 
 void M_check_sensor (char _check)

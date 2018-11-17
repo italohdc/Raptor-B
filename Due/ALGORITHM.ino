@@ -46,35 +46,9 @@ void tremaux ()
   LOG("\tE2:"); LOG(read_Infra('E', 2));
   LOG("\tD2:"); LOG(read_Infra('D', 2));
 
-  /*print_info_data("compare_way", compared_way (),
-                  "WF", map_readTravel('F'),
-                  "WE", map_readTravel('E'),
-                  "WD", map_readTravel('D'),
-                  "WT", map_readTravel('T'),
-                  " ", 0); //delay(5);
-  //do{}while(read_button_MENU() == 0);
-  //do{}while(read_button_MENU() != 0);
-  
-  print_info_data("map_readWall", 0,
-                  "WF", map_readWall('F'),
-                  "WE", map_readWall('E'),
-                  "WD", map_readWall('D'),
-                  "WT", map_readWall('T'),
-                  " ", 0); //delay(5);
-  //do{}while(read_button_MENU() == 0);
-  //do{}while(read_button_MENU() != 0);
-
-  print_info_char("map_readQuad", 0,
-                  "WF", map_readQuad('F'),
-                  "WE", map_readQuad('E'),
-                  "WD", map_readQuad('D'),
-                  "WT", map_readQuad('T'),
-                  " ", 0); //delay(5);
-  //do{}while(read_button_MENU() == 0);
-  //do{}while(read_button_MENU() != 0);*/
-  
   if(PRINT_MAZE) draw();
 
+//  Stops in case it's the initial tile
 //  if(victims_found >= 4 && maze[pZ][pY[pZ]][pX[pZ]] == 'S')
 //  {
 //    setMotor(0,0,0,0);
@@ -84,8 +58,6 @@ void tremaux ()
 //    }while((millis()-_cont_stop) < 10000);//8500);
 //  }
   
-  //LOGLN(map_readQuad('F'));
-
   //ACCEL
   if(readAccel('X') < rampa.goingUP || readAccel('X') > rampa.goingDOWN)
   {
@@ -96,19 +68,6 @@ void tremaux ()
     }
   }
 
-//  else if(distance_wall('D') > 200 && distance_wall('F') < 15
-//    && read_Infra('D',1)<300 && read_Infra('D',2)<300)
-//  {
-//    parede_falsa_DIR();
-//    parar(tempo);
-//  }
-//  else if(distance_wall('E') > 200 && distance_wall('F') < 15
-//    && read_Infra('E',1)<300 && read_Infra('E',2)<300)
-//  {
-//    parede_falsa_ESQ();
-//    parar(tempo);
-//  }
-  
   //QUADRADO PRETO
   else if(read_corQuad() < PRETO)//80)//150)
   {
@@ -176,22 +135,6 @@ void tremaux ()
       //mapearQuad();
       maze_traveled[pZ][pY[pZ]][pX[pZ]]--;
     }
-    
-    //print_info("FRENTE");
-   // mapear(0,1);
-    //read_distance_wall();
-
-    /*if(distance_wall('E') > dist_parede && distance_wall('E') < 200)
-    {
-      //ajustar_parede_DIREITA();
-      quadrante_esquerda();
-      //ajustar_parede_TRAS();
-      quadrante_frente();
-      
-      quadrante_re();
-
-      quadrante_direita();
-    }*/
   }
   
   /////ESQUERDA/////
@@ -214,10 +157,6 @@ void tremaux ()
     //print_info("VOLTAR");
     //mapear(0,-1);
     analisar_ajuste();
-//    if(map_readWall('E') && map_readWall('D') && map_readWall('F'))
-//    {
-//      
-//    }
     
     if(map_readWall('F')){
       search_victim_adjust = false;//true;
@@ -233,7 +172,9 @@ void tremaux ()
     //mapear(0,1);
    
   }
-  
+
+
+//  Print some info on the LCD Display  
 //  print_info_data(" ", 0,
 //                  "visited_places", visited_places,
 //                  "min_visited", min_visited,
@@ -253,15 +194,6 @@ void tremaux ()
 
   procurar_vitima();
   
-/*  else{
-    analogWrite(pin_LED, 180);
-    delay(120);
-    digitalWrite(pin_LED,LOW);
-    delay(120);
-    analogWrite(pin_LED, 180);
-    delay(120);
-    digitalWrite(pin_LED,LOW);
-  }*/
   LOG("\ntremaux::end\n\n");
 }
 

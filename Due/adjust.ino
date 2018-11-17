@@ -18,7 +18,6 @@ void analisar_ajuste ()
   read_distance_wall();
   esq =  map_readWall('E');//distance_wall('E');
   dir = map_readWall('D');//distance_wall('D');
-  //read_ultra_individual('T');
   tras = distance_wall('T') < dist_parede; //map_readWall('T');//distance_wall('T');
   fwd = map_readWall('F');//distance_wall('F');
   
@@ -28,16 +27,12 @@ void analisar_ajuste ()
      maze[pZ][pY[pZ]][pX[pZ]] != 'U' &&
      maze[pZ][pY[pZ]][pX[pZ]] != 'u') ajustar_parede_ESQUERDA();
 
-  //if((!fwd && !tras) && esq) ajustar_parede_ESQ_simples();
-     
   if((fwd || tras) && dir &&
      maze[pZ][pY[pZ]][pX[pZ]] != 'D' &&
      maze[pZ][pY[pZ]][pX[pZ]] != 'd' &&
      maze[pZ][pY[pZ]][pX[pZ]] != 'U' &&
      maze[pZ][pY[pZ]][pX[pZ]] != 'u') ajustar_parede_DIREITA();
 
-  //if((!fwd && !tras) && dir) ajustar_parede_DIR_simples();
-  
   if(tras) ajustar_parede_TRAS();
   if(fwd) ajustar_parede_FRENTE();
 }
@@ -46,12 +41,9 @@ void ajustar_parede_FRENTE ()
 {
   int contador = 0;
   int timer = millis();
-  //setMotor(-100, -100, -100, -100);
-  //delay(120); parar(25);
 
   do{
     read_distance_wall();
-   //read_ultra_individual('F');
 
     if (distance_wall('F') > 12) //APROXIMAR C/ ULTRA
       setMotor(vAP, vAP, vAP, vAP);
@@ -100,8 +92,6 @@ void ajustar_parede_TRAS ()
 {
   int contador = 0;
   int timer = millis();
-  //setMotor(100, 100, 100, 100);
-  //delay(120); parar(25);
 
   do {
      read_distance_wall();
@@ -164,7 +154,6 @@ void ajustar_parede_DIREITA ()
 
   do {
      read_distance_wall();
-   //read_ultra_individual('D');
 
     if (distance_wall('D') > 12) //APROXIMAR C/ ULTRA
       mecanum(vAP);
@@ -216,7 +205,6 @@ void ajustar_parede_ESQUERDA ()
 
   do {
      read_distance_wall();
-   //read_ultra_individual('E');
 
     if (distance_wall('E') > 12) //APROXIMAR C/ ULTRA
       mecanum(-vAP);
@@ -308,15 +296,6 @@ void ajustar_parede_ESQ_simples ()
 
   do {
     _erro[0] = read_Infra('E', 1)-offsetWall.esq1; _erro[1] = read_Infra('E', 2)-offsetWall.esq2;
-    
-//    if(read_Infra('E', 1) < 100) { // S/ PAREDE
-//      setMotor(-vAP_simples, -vAP_simples, -vAP_simples, -vAP_simples);
-//      delay(100);
-//    }
-//    else if(read_Infra('E', 2) < 100) { // S/ PAREDE
-//      setMotor(vAP_simples, vAP_simples, vAP_simples, vAP_simples);
-//      delay(100);
-//    }
     
     if( _erro[0] > (_erro[1]-(D_LIMIT_T*2)) )
       setMotor(vAP_simples, -vAP_simples, vAP_simples, -vAP_simples);

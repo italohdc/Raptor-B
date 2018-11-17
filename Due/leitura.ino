@@ -43,21 +43,18 @@ void read_distance_wall ()
 
 void read_ultra_individual (char parede)
 {
-  if(parede == 'E' || parede == 'L'){ wall_Esq = read_Ultra('E');}
-    
-  
-  else if(parede == 'D' || parede == 'R'){ wall_Dir = read_Ultra('D');}
-    
-  
-  else if(parede == 'F'){
-    wall_Frente = read_Ultra('F');}
-    
-  
-  else if(parede == 'T' || parede == 'B'){
-    wall_Tras = read_Ultra('T');}
-    
-    else{}
-    
+  if(parede == 'E' || parede == 'L') {
+    wall_Esq = read_Ultra('E');
+  }
+  else if(parede == 'D' || parede == 'R') {
+    wall_Dir = read_Ultra('D');
+  }
+  else if(parede == 'F') {
+    wall_Frente = read_Ultra('F');
+  }
+  else if(parede == 'T' || parede == 'B') {
+    wall_Tras = read_Ultra('T');
+  }
 }
 
 float distance_wall (char parede)

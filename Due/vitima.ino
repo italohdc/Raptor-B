@@ -14,8 +14,6 @@
 
 int temperatura[4];
 
-//int vParar_Rampa = 50;
-
 void imprimir_temp_vit (){
  /* lcd.setCursor(10,1);
   lcd.print(tempVitima);
@@ -52,34 +50,11 @@ void ler_temperatura ()
   temperatura[3] = ler_temp_NANO(CODIGO__TEMPERATURA_3);
 }
 
-//void procurar_vitima ()
-//{
-//  if(!vitima_ja_encontrada)
-//  {
-//    setMotor(0,0,0,0);
-//    vitima_ja_encontrada = true;
-//
-//    LIGAR_LED delay(1000);
-//    DESLIGAR_LED
-//  }
-//}
-
 bool procurar_vitima ()
 {
-  //if(!search_victim_adjust) return 0;
   if(!ativar_vitima) return 0;
   if(read_corQuad() < PRETO+50) return 0;
   ler_temperatura();
-  
-//  u8g.setRot180();
-//  u8g.setFont(u8g_font_6x10);
-//  print_info_data("vitTemp", tempVitima,
-//                  " ", vitima_ja_encontrada,
-//                  "F1", temperatura[0],
-//                  "F2", temperatura[2],
-//                  "E1", temperatura[1],
-//                  "E2", temperatura[3]);
-  //imprimir_temperatura();
   
   if((FOUND__VITIMA_EF || FOUND__VITIMA_DF) && !vitima_ja_encontrada){
     if(FOUND__ULTRA_F){// || DESATIVAR__ULTRA){
@@ -88,24 +63,10 @@ bool procurar_vitima ()
       print_info("VITIMA F");
       search_victim_adjust = false;
       
-      //parar(20);//20); //executar_quad=false;
-      //lcd.setCursor(5,1); lcd.print("VITIMA");
-      //read_distance_wall();
-      //if(distance_wall('F') < 11 || distance_wall('F') > 200){
-      //  ajustar_parede_FRENTE();
-      //  executar_quad=false;
-      //}
-      
-      //if(vitima_na_rampa==true){
-      //  setMotor(vParar_Rampa,vParar_Rampa,vParar_Rampa,vParar_Rampa);
         setMotor(-vAP,-vAP,-vAP,-vAP);
         delay_encoder('B', 2);
         
-    //    ajustar_parede_FRENTE(); ajustar_parede_FRENTE();
         setMotor(0,0,0,0);
-      //}
-      //else
-      //  setMotor(0,0,0,0);
       
       stop_fwd = true;
       avisar_vitima(); delay(100);
@@ -124,29 +85,17 @@ bool procurar_vitima ()
       print_info("VITIMA E");
       search_victim_adjust = false;
       
-      //parar(20); //executar_quad=false;
-      //ajustar_parede_ESQUERDA();
-      //read_distance_wall();
-      //if(distance_wall('F') < 11 || distance_wall('F') > 200){
-      //  ajustar_parede_FRENTE();
-      //  executar_quad=false;
-      //}
+      //Save last encoder value for encoder_delay//
+      enc_read_SAVED[0] = enc_read[0]; enc_read_SAVED[1] = enc_read[1];
+      enc_read_SAVED[2] = enc_read[2]; enc_read_SAVED[3] = enc_read[3];
+      //==//
       
-      //if(vitima_na_rampa==true){
-      //  setMotor(vParar_Rampa,vParar_Rampa,vParar_Rampa,vParar_Rampa);
+      quadrante_esquerda();
+      setMotor(-vAP,-vAP,-vAP,-vAP);
+      delay_encoder('B', 2);
+      ajustar_parede_FRENTE();
       
-        //Save last encoder value for encoder_delay//
-        enc_read_SAVED[0] = enc_read[0]; enc_read_SAVED[1] = enc_read[1];
-        enc_read_SAVED[2] = enc_read[2]; enc_read_SAVED[3] = enc_read[3];
-        //==//
-        
-        quadrante_esquerda();
-        setMotor(-vAP,-vAP,-vAP,-vAP);
-        delay_encoder('B', 2);
-        ajustar_parede_FRENTE();
-      //}
-      //else
-        setMotor(0,0,0,0);
+      setMotor(0,0,0,0);
       
       avisar_vitima(); delay(100);
       vitima_ja_encontrada = true;
@@ -166,30 +115,17 @@ bool procurar_vitima ()
       print_info("VITIMA D");
       search_victim_adjust = false;
       
-      //parar(20); //executar_quad=false;
-      //ajustar_parede_DIREITA();
-      //read_distance_wall();
-      //if(distance_wall('F') < 11 || distance_wall('F') > 200)
-      //{
-      //  ajustar_parede_FRENTE();
-      //  executar_quad=false;
-      //}
+      //Save last encoder value for encoder_delay//
+      enc_read_SAVED[0] = enc_read[0]; enc_read_SAVED[1] = enc_read[1];
+      enc_read_SAVED[2] = enc_read[2]; enc_read_SAVED[3] = enc_read[3];
+      //==//
       
-      //if(vitima_na_rampa==true){
-      //  setMotor(vParar_Rampa,vParar_Rampa,vParar_Rampa,vParar_Rampa);
-        
-        //Save last encoder value for encoder_delay//
-        enc_read_SAVED[0] = enc_read[0]; enc_read_SAVED[1] = enc_read[1];
-        enc_read_SAVED[2] = enc_read[2]; enc_read_SAVED[3] = enc_read[3];
-        //==//
-        
-        quadrante_direita();
-        setMotor(-vAP,-vAP,-vAP,-vAP);
-        delay_encoder('B', 2);
-        ajustar_parede_FRENTE();
-      //}
-      //else
-        setMotor(0,0,0,0);
+      quadrante_direita();
+      setMotor(-vAP,-vAP,-vAP,-vAP);
+      delay_encoder('B', 2);
+      ajustar_parede_FRENTE();
+      
+      setMotor(0,0,0,0);
       
       avisar_vitima(); delay(100);
       vitima_ja_encontrada = true;
@@ -224,26 +160,3 @@ void avisar_vitima ()
   }
   //kit.detach();
 }
-
-//void kit_soltar ()
-//{
-//  kit.write(160); delay(4000); //ABERTO
-//  kit.write(75); delay(4000); //FECHADO
-//}
-//void testar_nano ()
-//{
-//  //ler_temperatura();
-//  //LOG(temperatura[2]);
-//  
-//  if(ler_Serial() == 1){
-//    digitalWrite(13,HIGH); delay(100);
-//    digitalWrite(13,LOW); delay(100);
-//  }
-//  else
-//    digitalWrite(13,LOW);
-//}
-//
-//void imprimir_temperatura ()
-//{
-//  ler_temperatura();
-//}

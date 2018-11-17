@@ -56,32 +56,8 @@ void draw_setup() {
 void draw() {
  u8g.firstPage();  
   do {
-    //u8g.setFont(u8g_font_u8glib_4);
-    //u8g.setFont(u8g_font_osb21);
-    //if(lcd_function_name == ""){
-      //u8g.drawStr( 1, 6, "Raptor B");
-      //u8g.drawStr( 1, 16,lcd_function_name);
-    //}
-    //else
-    //  u8g.drawStr( 1, 6, "Raptor B,");
-    //--//
-    
-    //u8g.setFont(u8g_font_unifont);
-    //u8g.setPrintPos(21, 21); //u8g.print(ler_temp_NANO(103));
-    //u8g.print(read_button_MENU()); u8g.print("  ");//map_readTravel('F'));
-    //u8g.print(analogRead(pin_button_MENU));//map_readTravel('E'));
-    //u8g.print(map_readTravel('D'));
-    //u8g.print(map_readTravel('T'));
-    
-    //u8g.setFont(u8g_font_osb21);
-    //u8g.drawStr( 0, 22, "Hello World!");
-    
     if(PRINT_MAZE) draw_maze();
-    
-    //M_ultra();
   } while( u8g.nextPage() );
-  
-  //delay(50);
 }
 
 void print_info (char info[16]) {

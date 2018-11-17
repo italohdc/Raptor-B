@@ -191,25 +191,6 @@ void mapearQuad ()
     maze_wall[pZ][pY[pZ]][pX[pZ]][3]=false;
     maze_wall[pZ][pY[pZ]-1][pX[pZ]][0]=false;
   }
-  
-//  for(int i=TAM_MAZE-1; i>=0; i--)
-//  {
-//    for(int j=0; j<TAM_MAZE; j++)
-//    {
-//      //LOG(maze_wall[0][i][j][0]);
-//      //LOG(maze_wall[0][i][j][1]);
-//      //LOG(maze_wall[0][i][j][2]);
-//      //LOG(maze_wall[0][i][j][3]);
-//      //if(maze_wall[0][i][j][0]==true) LOG("[");
-//      if(maze_wall[0][i][j][1]==true) LOG("|");
-//      //if(maze_wall[0][i][j][2]==true) LOG("_");
-//      if(maze_wall[0][i][j][3]==true) LOG("_");
-//      //LOG(maze_traveled[0][i][j]);
-//      //LOG("\t");
-//    }
-//    LOGLN();
-//  }
-//  LOGLN();
 }
 
 void mapearQuad2 ()
@@ -258,71 +239,34 @@ void mapearQuad2 ()
 
 void draw_maze ()
 {
-  for(int mi=0; mi<TAM_MAZE; mi++)//(int mi=TAM_MAZE-1; mi>=0; mi--)
+  for(int mi=0; mi<TAM_MAZE; mi++)
   {
     for(int mj=0; mj<TAM_MAZE; mj++)
     {
       int m_sum1, m_sum2, m_tam1, m_tam2;
-      //if(mapSide[pZ]==1)
-      //{
-        //m_sum1 = mj*4 + 63;
-        //m_sum2 = ((TAM_MAZE-1)-mi)*4;
         
-  if(mapSide[pZ]==0 || mapSide[pZ]==2) //PORTRAIT
-	{
-  	  m_sum1 = mj*4;
-	  m_sum2 = (((TAM_MAZE-1)-mi)*4) + 63;
-	}
-	if(mapSide[pZ]==1 || mapSide[pZ]==3) //LANDSCAPE
-	{
-	  m_sum1 = mj*4 + 63;
-	  m_sum2 = ((TAM_MAZE-1)-mi)*4;
-	}
-
-//m_sum1 = mj*4;
-//m_sum2 = ((TAM_MAZE-1)-mi)*4;
-        
-        m_tam1 = 5;
-        m_tam2 = 1;
-      //}
-      /*if(mapSide[pZ]==3)
+      if(mapSide[pZ]==0 || mapSide[pZ]==2) //PORTRAIT
       {
-        m_sum1 = ((TAM_MAZE-1)-mj)*4 + 63;
-        m_sum2 = mi*4;
-        m_tam1 = 5;
-        m_tam2 = 1;
-      }*/
-      /*if(mapSide[pZ]==2)
-      {
-        m_sum1 = ((TAM_MAZE-1)-mj)*4 + 63;
-        m_sum2 = ((TAM_MAZE-1)-mi)*4;
-        m_tam1 = 1;
-        m_tam2 = 5;
-      }*/
-      /*if(mapSide[pZ]==0)
+          m_sum1 = mj*4;
+        m_sum2 = (((TAM_MAZE-1)-mi)*4) + 63;
+      }
+      if(mapSide[pZ]==1 || mapSide[pZ]==3) //LANDSCAPE
       {
         m_sum1 = mj*4 + 63;
-        m_sum2 = mi*4 - 4;
+        m_sum2 = ((TAM_MAZE-1)-mi)*4;
+      }
+        
         m_tam1 = 5;
         m_tam2 = 1;
-      }*/
       
       if(maze_wall[pZ][mi][mj][0])
       {
-        //if(mapSide[pZ]==1) 
         u8g.drawBox(m_sum1,m_sum2,m_tam1,m_tam2);
-        //if(mapSide[pZ]==2) u8g.drawBox(m_sum1,m_sum2,m_tam1,m_tam2); //SWAP
-        //if(mapSide[pZ]==3) u8g.drawBox(m_sum1,m_sum2,m_tam1,m_tam2);
-        //if(mapSide[pZ]==0) u8g.drawBox(m_sum1,m_sum2,m_tam1,m_tam2); //SWAP
       }
         
       if(maze_wall[pZ][mi][mj][1])
       {
-        //if(mapSide[pZ]==1) 
         u8g.drawBox(m_sum1,m_sum2,m_tam2,m_tam1);
-        //if(mapSide[pZ]==2) u8g.drawBox(m_sum1,m_sum2,m_tam2,m_tam1); //SWAP
-        //if(mapSide[pZ]==3) u8g.drawBox(m_sum1,m_sum2,m_tam2,m_tam1);
-        //if(mapSide[pZ]==0) u8g.drawBox(m_sum1,m_sum2,m_tam2,m_tam1); //SWAP
       }
       
       if(mj == pX[pZ] && mi == pY[pZ])
@@ -331,12 +275,6 @@ void draw_maze ()
         if(mapSide[pZ]==2) u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_left_arrow);
         if(mapSide[pZ]==3) u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_up_arrow);
         if(mapSide[pZ]==0) u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_right_arrow);
-        
-        //if(mapSide[pZ]==1) 
-        //u8g.drawBox(m_sum1+2,m_sum2+2,1,1);
-        //if(mapSide[pZ]==2) u8g.drawBox(m_sum1-2,m_sum2+2,1,1);
-        //if(mapSide[pZ]==3) u8g.drawBox(m_sum1-2,m_sum2-2,1,1);
-        //if(mapSide[pZ]==0) u8g.drawBox(m_sum1+2,m_sum2-2,1,1);
       }
       
       else
@@ -346,10 +284,6 @@ void draw_maze ()
           u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_deleted);
         }
 
-//        if(mi==startY && mj ==startX )
-//        {
-//          u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_black);
-//        }
         if(maze[pZ][mi][mj] == '#')
         {
           u8g.drawBitmapP(m_sum1+1, m_sum2+1, 1, 3, BIT_black);

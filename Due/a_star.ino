@@ -11,25 +11,16 @@ char directionv = '#'; int way_dist = 2 * TAM_MAZE;
 void asterix_virtual() {
   way_traveled[pY[pZ]][pX[pZ]]++;
 
-  //u8g.setPrintPos(1, 8);
-  //u8g.print(1);
-
   if (way_place('U') != -1) way_value = way_place('U');
   else if (way_place('D') != -1) way_value = way_place('D');
   else if (way_place('L') != -1) way_value = way_place('L');
   else if (way_place('R') != -1) way_value = way_place('R');
   else way_value = 1000;
 
-  //u8g.setPrintPos(1, 8);
-  //u8g.print(2);
-
   if (way_value > way_place('U') && way_place('U') != -1) way_value = way_place('U');
   if (way_value > way_place('D') && way_place('D') != -1) way_value = way_place('D');
   if (way_value > way_place('L') && way_place('L') != -1) way_value = way_place('L');
   if (way_value > way_place('R') && way_place('R') != -1) way_value = way_place('R');
-
-  //u8g.setPrintPos(1, 8);
-  //u8g.print(3);
 
   if (way_place('D') != -1 && available_place('D') < way_dist && way_place('D') == way_value) {
     directionv = 'D';
@@ -48,11 +39,9 @@ void asterix_virtual() {
     way_dist = available_place('R');
   }
 
-  //u8g.setPrintPos(1, 8);
-  //u8g.print(4);
-
-  //if(start_delete) delete_path(pX, pY); //Delete the square in case it's an endless route
-  //This function isn't executed on the first loop
+  // The next function is commented because endless routes are already removed during Tremaux //
+    // if(start_delete) delete_path(pX, pY); //Delete the square in case it's an endless route
+    // This function isn't executed on the first loop
 
   //SWITCH DIRECTION TO GO// (based on the compared directions)
   switch (directionv)
@@ -83,9 +72,7 @@ void asterix_virtual() {
       break;
   }
 
-  //u8g.setPrintPos(1, 8);
-  //u8g.print(5);
-  //start_delete = true; //Execute "delete_path()" on next loop
+  // start_delete = true; //Execute "delete_path()" on next loop
 }
 
 void a_star_data(){
@@ -96,11 +83,11 @@ void a_star_data(){
 
 int verificar_pos_final() {
   int let=65;
-  while (1){///////
+  while (1){
   for (int i = 0; i < TAM_MAZE; i++) {
     for (int j = 0; j < TAM_MAZE; j++) {
 
-      if (pZ == 0){//false) {
+      if (pZ == 0) {
         if (maze[pZ][i][j] == 'S')
         {
           startX = j;
@@ -109,30 +96,19 @@ int verificar_pos_final() {
         }
       }
 
-//      if (pZ == true) {
-//        if (maze[pZ][i][j] == 'U' || maze[pZ][i][j] == 'D')
-//        {
-//          startX = j;
-//          startY = i;
-//        }
-//      }
       else if(maze[pZ][i][j] == ((char)(let)) || maze[pZ][i][j] == ((char)(let+32)))
       {
          startX = j;
          startY = i;
          return 1;
       }
-      
-      //if(find_path(i,j) == 0){
-      //  dist_to_end[i][j] ++;
-      //}
+
     }
   }
   let++;
   }
 //  calculate_return_end(); //Calculate distance to the end
 //  calculate_return_start(); //Calculate distance to the start
-
 }
 
 void calculate_return_end () //Calculate distances (X+Y) to the end
@@ -140,10 +116,6 @@ void calculate_return_end () //Calculate distances (X+Y) to the end
   for (int i = 0; i < TAM_MAZE; i++) {
     for (int j = 0; j < TAM_MAZE; j++) {
       dist_to_end[i][j] = abs(i - startY) + abs(j - startX);
-
-      //if(find_path(i,j) == 0){
-      //  dist_to_end[i][j] ++;
-      //}
     }
   }
 }
@@ -153,10 +125,6 @@ void calculate_return_start () //Calculate distances (X+Y) to the start
   for (int i = 0; i < TAM_MAZE; i++) {
     for (int j = 0; j < TAM_MAZE; j++) {
       dist_to_start[i][j] = abs(i - pY[pZ]) + abs(j - pX[pZ]);
-
-      //if(find_path(i,j) == 0){
-      //  dist_to_end[i][j] ++;
-      //}
     }
   }
 }
@@ -209,10 +177,6 @@ int way_place (char letter)
 //{
 //  if(x<0 || y<0 || x>=TAM_MAZE || y>=TAM_MAZE) return -1; //Outside the Maze //////////////////BARREIRA DO LABIRINTO OU DA MATRIX (ESCOLHER)////////////////////
 //
-//
-//
-//
-//
 //  switch(maze[pZ][y][x])
 //  {
 //    case '#': //Wall
@@ -238,31 +202,15 @@ int available_place (char letter)
   switch (letter)
   {
     case 'U':
-      //    if(maze_wall[pZ][pY[pZ]][pX[pZ]][0] == 0)
-      //    {
-      //       if(maze[pZ][pY[pZ]+1][pX[pZ]] == '#' || maze[pZ][pY[pZ]=!][pX[pZ]] == 'X') return -1;
-      //    }
       return dist_to_end[pY[pZ] + 1][pX[pZ]];
 
     case 'D':
-      //    if(maze_wall[pZ][pY[pZ]][pX[pZ]][3] == 0)
-      //    {
-      //       if(maze[pZ][pY[pZ]-1][pX[pZ]] == '#' || maze[pZ][pY[pZ]-1][pX[pZ]] == 'X') return -1;
-      //    }
       return dist_to_end[pY[pZ] - 1][pX[pZ]];
 
     case 'L':
-      //    if(maze_wall[pZ][pY[pZ]][pX[pZ]][1] == 0)
-      //    {
-      //       if(maze[pZ][pY[pZ]][pX[pZ]-1] == '#' || maze[pZ][pY[pZ]][pX[pZ]-1] == 'X') return -1;
-      //    }
       return dist_to_end[pY[pZ]][pX[pZ] - 1];
 
     case 'R':
-      //    if(maze_wall[pZ][pY[pZ]][pX[pZ]][2] == 0)
-      //    {
-      //       if(maze[pZ][pY[pZ]][pX[pZ]+1] == '#' || maze[pZ][pY[pZ]][pX[pZ]+1] == 'X') return -1;
-      //    }
       return dist_to_end[pY[pZ]][pX[pZ] + 1];
 
     default:

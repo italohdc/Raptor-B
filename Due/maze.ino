@@ -9,9 +9,6 @@ void delete_path ()
   int av_place = (map_readWall('F')|_wall1) + (map_readWall('T')|_wall4) +
       (map_readWall('E')|_wall2) + (map_readWall('D')|_wall3);
   
-  //find_path(dx+1, dy) + find_path(dx-1, dy) +
-  //find_path(dx, dy-1) + find_path(dx, dy+1);
-  
   if(av_place == 3 && maze[pZ][pY[pZ]][pX[pZ]] != 'S')
   {
     if(maze[pZ][pY[pZ]][pX[pZ]] != '#')
@@ -21,20 +18,6 @@ void delete_path ()
       if(maze[pZ][pY[pZ]][pX[pZ]] != 'u')
       if(maze[pZ][pY[pZ]][pX[pZ]] != 'd')
       maze[pZ][pY[pZ]][pX[pZ]] = 'X';
-      //digitalWrite(pin_LED, HIGH);
-      //delay(2000); digitalWrite(pin_LED, LOW);
     }
   }
-  
-  /*else if((map_readWall('F')==true && map_readWall('F')==true) && (map_readQuad('E')=='X' || map_readQuad('D')=='X')
-          && maze[pZ][pY[pZ]][pX[pZ]] != 'S')
-  {
-    maze[pZ][pY[pZ]][pX[pZ]] = 'X';
-  }
-  
-  else if((map_readWall('E')==true && map_readWall('D')==true) && (map_readQuad('F')=='X' || map_readQuad('T')=='X')
-          && maze[pZ][pY[pZ]][pX[pZ]] != 'S')
-  {
-    maze[pZ][pY[pZ]][pX[pZ]] = 'X';
-  }*/
 }
