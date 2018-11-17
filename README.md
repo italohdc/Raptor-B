@@ -30,7 +30,7 @@ See the robot working: [watch video](https://www.youtube.com/watch?v=Wu9DYnvc1BU
 
 To explore the maze, it's used an algorithm called "Tremaux". This algorithm makes the robot goes right always as possible. If the robot cannot go right, it goes forward and, in the last scenario, goes left.
 
-| ![](Assets/tremaux1.png) | ![](Assets/tremaux2.png) |
+| ![](Assets/tremaux2.png) | ![](Assets/tremaux1.png) |
 |-|-|
 
 You can read more about Tremaux Algorithm in here: [Interlude • Tremaux’s Algorithm
